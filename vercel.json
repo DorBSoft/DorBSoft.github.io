@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://dorbsoft.wixsite.com/welcome",
+      "permanent": true
+    }
+  ]
+}
