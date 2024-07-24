@@ -3,23 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opening location...</title>
+    <title>Location Redirect</title>
+
     <script>
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const query = urlParams.get('q');
             if (query) {
-                // Set meta refresh dynamically
-                const metaRefresh = document.createElement('meta');
-                metaRefresh.httpEquiv = 'refresh';
-                metaRefresh.content = `1; url=geo:${query}?q=${query}`;
-                document.head.appendChild(metaRefresh);
-
-                // Redirect to Google Maps URL to generate preview
-                const googleMapsUrl = `https://www.google.com/maps?q=${query}`;
-	            //setTimeout(() => {
-                		window.location.href = googleMapsUrl;
-	            //}, 1000);
+                // Redirect to the geo URI
+                window.location.href = `geo:${query}?q=${query}`;
             } else {
                 document.body.innerText = 'Invalid query parameter';
             }
@@ -27,6 +19,6 @@
     </script>
 </head>
 <body>
-    Opening location...
+<iframe src="https://www.google.com/maps/@32.9940558,35.095882?q=32.9940558,35.0958821" title="map"></iframe>
 </body>
 </html>
