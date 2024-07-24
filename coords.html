@@ -12,14 +12,14 @@
                 // Set meta refresh dynamically
                 const metaRefresh = document.createElement('meta');
                 metaRefresh.httpEquiv = 'refresh';
-                metaRefresh.content = `0; url=geo:${query}?q=${query}`;
+                metaRefresh.content = `1; url=geo:${query}?q=${query}`;
                 document.head.appendChild(metaRefresh);
 
                 // Redirect to Google Maps URL to generate preview
                 const googleMapsUrl = `https://www.google.com/maps?q=${query}`;
-	            setTimeout(() => {
+	            //setTimeout(() => {
                 		window.location.href = googleMapsUrl;
-	            }, 1000);
+	            //}, 1000);
             } else {
                 document.body.innerText = 'Invalid query parameter';
             }
