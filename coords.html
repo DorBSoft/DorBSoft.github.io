@@ -17,7 +17,9 @@
 
                 // Redirect to Google Maps URL to generate preview
                 const googleMapsUrl = `https://www.google.com/maps?q=${query}`;
-                window.location.href = googleMapsUrl;
+	            setTimeout(() => {
+                		window.location.href = googleMapsUrl;
+	            }, 1000);
             } else {
                 document.body.innerText = 'Invalid query parameter';
             }
