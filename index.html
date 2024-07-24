@@ -2,31 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opening location...</title>
-    <script>
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const query = urlParams.get('q');
-            if (query) {
-                // Set meta refresh dynamically
-                const metaRefresh = document.createElement('meta');
-                metaRefresh.httpEquiv = 'refresh';
-                metaRefresh.content = `0; url=geo:${query}?q=${query}`;
-                document.head.appendChild(metaRefresh);
-
-                // Redirect to Google Maps URL to generate preview
-                const googleMapsUrl = `https://www.google.com/maps?q=${query}`;
-	            setTimeout(() => {
-                		window.location.href = googleMapsUrl;
-	            }, 1000);
-            } else {
-                document.body.innerText = 'Invalid query parameter';
-            }
-        };
-    </script>
+    <meta http-equiv="refresh" content="0;url=https://dorbsoft.wixsite.com/welcome">
+    <title>Redirecting...</title>
 </head>
 <body>
-    Opening location...
+    <p>If you are not redirected, <a href="https://dorbsoft.wixsite.com/welcome">click here</a>.</p>
+    <script>
+        window.location.href = "https://dorbsoft.wixsite.com/welcome";
+    </script>
 </body>
 </html>
