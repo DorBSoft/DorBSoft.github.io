@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Redirect</title>
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            if (query) {
+                // Redirect to the geo URI
+                window.location.href = `geo:${query}?q=${query}`;
+            } else {
+                document.body.innerText = 'Invalid query parameter';
+            }
+        };
+    </script>
+</head>
+<body>
+    Redirecting...
+</body>
+</html>
