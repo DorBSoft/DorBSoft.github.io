@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta id="og-url" property="og:url" content="https://www.google.com/maps?q=0,0">
-    <title>Location Redirect</title>
+    <title>Opening location...</title>
     <script>
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const query = urlParams.get('q');
             if (query) {
-                document.getElementById('og-url').setAttribute('content', `https://www.google.com/maps?q=${lat},${lng}`);
-                // Redirect to the geo URI
-                window.location.href = `geo:${query}?q=${query}`;
+                // Set meta refresh dynamically
+                const metaRefresh = document.createElement('meta');
+                metaRefresh.httpEquiv = 'refresh';
+                metaRefresh.content = `0; url=geo:${query}?q=${query}`;
+                document.head.appendChild(metaRefresh);
+
+                // Redirect to Google Maps URL to generate preview
+                const googleMapsUrl = `https://www.google.com/maps?q=${query}`;
+                window.location.href = googleMapsUrl;
             } else {
                 document.body.innerText = 'Invalid query parameter';
             }
@@ -20,6 +25,6 @@
     </script>
 </head>
 <body>
-    Redirecting...
+    Opening location...
 </body>
 </html>
