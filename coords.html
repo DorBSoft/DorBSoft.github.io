@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location Redirect</title>
+    <title>Location</title>
 
     <script>
         window.onload = function() {
@@ -13,12 +13,12 @@
                 // Redirect to the geo URI
                 window.location.href = `geo:${query}?q=${query}`;
             } else {
-                document.body.innerText = 'Invalid query parameter';
+                document.body.innerText = 'Invalid coordinates';
             }
         };
     </script>
 </head>
 <body>
-<iframe src="https://www.google.com/maps/@32.9940558,35.095882?q=32.9940558,35.0958821" title="map"></iframe>
+Location
 </body>
 </html>
