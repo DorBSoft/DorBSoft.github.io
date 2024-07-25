@@ -10,8 +10,24 @@
             const urlParams = new URLSearchParams(window.location.search);
             const query = urlParams.get('q');
             if (query) {
+                const geoUri = `geo:${query}?q=${query}`;
+
+                // Create a link in the body
+                const link = document.createElement('a');
+                link.href = geoUri;
+                link.innerText = 'Location';
+                document.body.appendChild(link);
+
+                const closeButton = document.createElement('button');
+                closeButton.innerText = 'Close';
+                closeButton.onclick = function() {
+                     window.close();
+                };
+                document.body.appendChild(closeButton);
+                
                 // Redirect to the geo URI
-                window.location.href = `geo:${query}?q=${query}`;
+                window.location.href = geoUri;
+                
             } else {
                 document.body.innerText = 'Invalid coordinates';
             }
@@ -19,6 +35,5 @@
     </script>
 </head>
 <body>
-Location
 </body>
 </html>
