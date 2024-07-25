@@ -11,24 +11,39 @@
             const query = urlParams.get('q');
             if (query) {
                 const geoUri = `geo:${query}?q=${query}`;
+                const fallbackUri = `https://www.google.com/maps/search/?api=1&query=${query}`;
 
                 // Create a link in the body
                 const link = document.createElement('a');
                 link.href = geoUri;
                 link.innerText = 'Location';
+                link.onclick = function(e) {
+                    e.preventDefault();
+                    // Attempt to open the geo URI
+                    window.location.href = geoUri;
+                    // After a short delay, redirect to the fallback URL
+                    setTimeout(function() {
+                        window.location.href = fallbackUri;
+                    }, 1000); // Adjust delay as needed
+                };
                 document.body.appendChild(link);
 
                 document.body.appendChild(document.createElement('br'));
-                
+                document.body.appendChild(document.createElement('br'));
+
                 const closeButton = document.createElement('button');
                 closeButton.innerText = 'Close';
                 closeButton.onclick = function() {
                      window.close();
                 };
                 document.body.appendChild(closeButton);
-                
-                // Redirect to the geo URI
+
+                // Attempt to redirect to the geo URI
                 window.location.href = geoUri;
+                // After a short delay, redirect to the fallback URL
+                setTimeout(function() {
+                    window.location.href = fallbackUri;
+                }, 1000); // Adjust delay as needed
                 
             } else {
                 document.body.innerText = 'Invalid coordinates';
