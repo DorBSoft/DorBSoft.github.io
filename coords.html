@@ -11,7 +11,7 @@
             const query = urlParams.get('q');
             if (query) {
                 const geoUri = `geo:${query}?q=${query}`;
-                const fallbackUri = `https://www.google.com/maps/search/?api=1&query=${query}`;
+                const fallbackUri = `https://www.google.com/maps/@${query}`;
 
                 // Create a link in the body
                 const link = document.createElement('a');
@@ -38,12 +38,7 @@
                 };
                 document.body.appendChild(closeButton);
 
-                // Attempt to redirect to the geo URI
-                window.location.href = geoUri;
-                // After a short delay, redirect to the fallback URL
-                setTimeout(function() {
-                    window.location.href = fallbackUri;
-                }, 1000); // Adjust delay as needed
+                link.click()
                 
             } else {
                 document.body.innerText = 'Invalid coordinates';
