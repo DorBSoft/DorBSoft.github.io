@@ -14,9 +14,16 @@
                 const fallbackUri = `http://maps.google.com/maps?ie=UTF8&&q=${query}`;
 
                 // Create a hidden iframe to handle the geo URI
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
+                //const iframe = document.createElement('iframe');
+                //iframe.style.display = 'none';
+                //document.body.appendChild(iframe);
+
+                // Create a hidden link to handle the geo URI
+                const hiddenLink = document.createElement('a');
+                hiddenLink.style.display = 'none';
+                hiddenLink.href = geoUri;
+                hiddenLink.innerText = 'Map';
+                document.body.appendChild(hiddenLink);
                 
                 // Create a link in the body
                 const link = document.createElement('a');
@@ -27,12 +34,13 @@
                     // Attempt to open the geo URI
                     //window.open(geoUri, '_blank');
                     //iframe.src = geoUri;
-                    window.location.href = geoUri;
+                    //window.location.href = geoUri;
+                    hiddenLink.click();
                     
                     // After a short delay, redirect to the fallback URL
                     setTimeout(function() {
-                        //window.location.href = fallbackUri;
-                        window.open(fallbackUri, '_blank');
+                        window.location.href = fallbackUri;
+                        //window.open(fallbackUri, '_blank');
                     }, 1000); // Adjust delay as needed
                 };
                 document.body.appendChild(link);
