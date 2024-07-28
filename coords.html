@@ -24,6 +24,8 @@
                 hiddenLink.href = geoUri;
                 hiddenLink.innerText = 'Map';
                 document.body.appendChild(hiddenLink);
+                document.body.appendChild(document.createElement('br'));
+                document.body.appendChild(document.createElement('br'));
                 
                 // Create a link in the body
                 const link = document.createElement('a');
@@ -35,7 +37,7 @@
                     //window.open(geoUri, '_blank');
                     //iframe.src = geoUri;
                     //window.location.href = geoUri;
-                    //hiddenLink.click();
+                    hiddenLink.click();
                     
                     // After a short delay, redirect to the fallback URL
                     setTimeout(function() {
@@ -55,7 +57,7 @@
                 };
                 document.body.appendChild(closeButton);
 
-                link.click()
+                //link.click()
                 
             } else {
                 document.body.innerText = 'Invalid coordinates';
