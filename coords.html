@@ -20,7 +20,7 @@
                 link.onclick = function(e) {
                     e.preventDefault();
                     // Attempt to open the geo URI
-                    window.location.href = geoUri;
+                    window.open(geoUri, '_self');
                     // After a short delay, redirect to the fallback URL
                     setTimeout(function() {
                         window.location.href = fallbackUri;
