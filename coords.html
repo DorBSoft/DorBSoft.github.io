@@ -58,9 +58,16 @@
                 document.body.appendChild(closeButton);
 
                 //link.click()
-                setTimeout(function() {
-                       hiddenLink.click();
-                    }, 1000); 
+                //setTimeout(function() {
+                  //     hiddenLink.click();
+                   // }, 1000); 
+                // Simulate a user click on the button
+                const event = new MouseEvent('click', {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true
+                });
+                hiddenLink.dispatchEvent(event);
                 
                 
             } else {
