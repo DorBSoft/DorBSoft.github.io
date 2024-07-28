@@ -25,12 +25,14 @@
                 link.onclick = function(e) {
                     e.preventDefault();
                     // Attempt to open the geo URI
-                    window.open(geoUri, '_blank');
+                    //window.open(geoUri, '_blank');
                     //iframe.src = geoUri;
+                    window.location.href = geoUri;
                     
                     // After a short delay, redirect to the fallback URL
                     setTimeout(function() {
-                        window.location.href = fallbackUri;
+                        //window.location.href = fallbackUri;
+                        window.open(fallbackUri, '_blank');
                     }, 1000); // Adjust delay as needed
                 };
                 document.body.appendChild(link);
