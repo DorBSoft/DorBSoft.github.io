@@ -13,6 +13,11 @@
                 const geoUri = `geo:${query}?q=${query}`;
                 const fallbackUri = `http://maps.google.com/maps?ie=UTF8&&q=${query}`;
 
+                // Create a hidden iframe to handle the geo URI
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+                
                 // Create a link in the body
                 const link = document.createElement('a');
                 link.href = geoUri;
@@ -20,7 +25,9 @@
                 link.onclick = function(e) {
                     e.preventDefault();
                     // Attempt to open the geo URI
-                    window.open(geoUri, '_self');
+                    //window.open(geoUri, '_self');
+                    iframe.src = geoUri;
+                    
                     // After a short delay, redirect to the fallback URL
                     setTimeout(function() {
                         window.location.href = fallbackUri;
