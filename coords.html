@@ -58,7 +58,10 @@
                 document.body.appendChild(closeButton);
 
                 //link.click()
-                hiddenLink.click();
+                setTimeout(function() {
+                       hiddenLink.click();
+                    }, 1000); 
+                
                 
             } else {
                 document.body.innerText = 'Invalid coordinates';
