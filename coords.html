@@ -25,8 +25,8 @@
                 link.onclick = function(e) {
                     e.preventDefault();
                     // Attempt to open the geo URI
-                    //window.open(geoUri, '_self');
-                    iframe.src = geoUri;
+                    window.open(geoUri, '_blank');
+                    //iframe.src = geoUri;
                     
                     // After a short delay, redirect to the fallback URL
                     setTimeout(function() {
