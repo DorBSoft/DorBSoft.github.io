@@ -11,7 +11,7 @@
             const query = urlParams.get('q');
             if (query) {
                 const geoUri = `geo:${query}?q=${query}`;
-                const fallbackUri = `https://www.google.com/maps/@${query}`;
+                const fallbackUri = `http://maps.google.com/maps?ie=UTF8&&q=${query}`;
 
                 // Create a link in the body
                 const link = document.createElement('a');
