@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            /* Light delicate background color */
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff;
+            /* White background for the container */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow for better visibility */
+        }
+
+        a,
+        button,
+        p {
+            margin: 10px 0;
+            font-size: 2em;
+            /* Heading size */
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #4CAF50;
+            /* Green background for the button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            /* Slightly darker green on hover */
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            const container = document.getElementById('container');
+
+            if (query) {
+                const appleUri = `https://maps.apple.com/?q=${query}`
+                const geoUri = `geo:${query}?q=${query}`;
+                const mapsUri = `http://maps.google.com/maps?ie=UTF8&&q=${query}`;
+
+                // Check if the user is on an iOS device
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+                // Create a link in the body
+                const link = document.createElement('a');
+                link.href = geoUri;
+                link.innerText = 'Location';
+                link.onclick = function (e) {
+                    e.preventDefault();
+
+                    // Attempt to open the location URI
+                    window.location.href = isIOS ? appleUri : geoUri;
+
+                    // After a short delay, redirect to the maps URL
+                    setTimeout(function () {
+                        window.location.href = mapsUri;
+                    }, 100);
+                };
+                container.appendChild(link);
+
+                document.body.appendChild(document.createElement('br'));
+                document.body.appendChild(document.createElement('br'));
+
+                // const closeButton = document.createElement('button');
+                // closeButton.innerText = 'Close';
+                // closeButton.onclick = function () {
+                //     if (window.history.length > 1) {
+                //         window.history.back();
+                //     } else {
+                //         window.close();
+                //     }
+                // };
+                // container.appendChild(closeButton);
+
+                link.click();
+
+            } else {
+                const errorText = document.createElement('p');
+                errorText.innerText = 'Invalid coordinates. Please check your link.';
+                container.appendChild(errorText);
+
+                // const closeButton = document.createElement('button');
+                // closeButton.innerText = 'Close';
+                // closeButton.onclick = function () {
+                //     if (window.history.length > 1) {
+                //         window.history.back();
+                //     } else {
+                //         window.close();
+                //     }
+                // };
+                // container.appendChild(closeButton);
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div id="container"></div>
+</body>
+
+</html>
