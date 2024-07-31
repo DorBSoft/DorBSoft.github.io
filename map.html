@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Location">
+    <meta property="og:image" content="https://dorbsoft.com/assets/location_icon_inside_small.PNG">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="150">
+    <meta property="og:image:height" content="79">
+
+    <title>Location</title>
+    <link rel="icon" type="image/png" href="/assets/location_icon.PNG">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            /* Light delicate background color */
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff;
+            /* White background for the container */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow for better visibility */
+        }
+
+        a,
+        button,
+        p {
+            margin: 10px 0;
+            font-size: 2em;
+            /* Heading size */
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #4CAF50;
+            /* Green background for the button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            /* Slightly darker green on hover */
+        }
+    </style>
+    <script>
+        const translations = {
+            "en": "Location",
+            "zh": "位置",
+            "es": "Ubicación",
+            "ar": "موقع",
+            "fr": "Emplacement",
+            "de": "Standort",
+            "pt": "Localização",
+            "ja": "位置",
+            "ru": "Местоположение",
+            "ko": "위치",
+            "it": "Posizione",
+            "tr": "Konum",
+            "vi": "Vị trí",
+            "pl": "Lokalizacja",
+            "nl": "Locatie",
+            "th": "สถานที่",
+            "sv": "Plats",
+            "fi": "Sijainti",
+            "da": "Placering",
+            "cs": "Umístění",
+            "hu": "Hely",
+            "ro": "Locație",
+            "sk": "Poloha",
+            "bg": "Местоположение",
+            "el": "Τοποθεσία",
+            "he": "מיקום",
+            "ms": "Lokasi",
+            "id": "Lokasi",
+            "uk": "Місцезнаходження",
+            "sr": "Локација",
+            "lt": "Vieta",
+            "lv": "Atrašanās vieta",
+            "et": "Asukoht",
+            "sl": "Lokacija"
+        };
+
+        function getTranslatedLocation() {
+            const lang = navigator.language.split('-')[0]; // Get language code without region
+            return translations[lang] || translations['en'];
+        }
+
+        window.onload = function () {
+            const translatedLocation = getTranslatedLocation();
+            document.title = translatedLocation;
+
+            // Update Open Graph title dynamically
+            const ogTitleMetaTag = document.querySelector('meta[property="og:title"]');
+            if (ogTitleMetaTag) {
+                ogTitleMetaTag.setAttribute('content', translatedLocation);
+            } else {
+                const newOgTitleMetaTag = document.createElement('meta');
+                newOgTitleMetaTag.setAttribute('property', 'og:title');
+                newOgTitleMetaTag.setAttribute('content', translatedLocation);
+                document.head.appendChild(newOgTitleMetaTag);
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q');
+            const container = document.getElementById('container');
+
+            if (query) {
+                const appleUri = `https://maps.apple.com/?q=${query}`;
+                const geoUri = `geo:${query}?q=${query}`;
+                const mapsUri = `http://maps.google.com/maps?ie=UTF8&&q=${query}`;
+
+                // Check if the user is on an iOS device
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+                // Create a link in the body
+                const link = document.createElement('a');
+                link.href = geoUri;
+                link.innerText = translatedLocation;
+                link.onclick = function (e) {
+                    e.preventDefault();
+
+                    // Attempt to open the location URI
+                    window.location.href = isIOS ? appleUri : geoUri;
+
+                    // After a short delay, redirect to the maps URL
+                    setTimeout(function () {
+                        window.location.href = mapsUri;
+                    }, 100);
+                };
+                container.appendChild(link);
+
+                document.body.appendChild(document.createElement('br'));
+                document.body.appendChild(document.createElement('br'));
+
+                // const closeButton = document.createElement('button');
+                // closeButton.innerText = 'Close';
+                // closeButton.onclick = function () {
+                //     if (window.history.length > 1) {
+                //         window.history.back();
+                //     } else {
+                //         window.close();
+                //     }
+                // };
+                // container.appendChild(closeButton);
+
+                link.click();
+
+            } else {
+                const errorText = document.createElement('p');
+                errorText.innerText = 'Invalid coordinates. Please check your link.';
+                container.appendChild(errorText);
+
+                // const closeButton = document.createElement('button');
+                // closeButton.innerText = 'Close';
+                // closeButton.onclick = function () {
+                //     if (window.history.length > 1) {
+                //         window.history.back();
+                //     } else {
+                //         window.close();
+                //     }
+                // };
+                // container.appendChild(closeButton);
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div id="container"></div>
+</body>
+
+</html>
